@@ -1,9 +1,8 @@
 class TimelineEvent {
-  // Fields
-  int id;
-  String title;
-  String description;
-  DateTime timestamp;
+  final int id;
+  final String title;
+  final String description;
+  final DateTime timestamp;
 
   // Constructor
   TimelineEvent({
@@ -13,22 +12,8 @@ class TimelineEvent {
     required this.timestamp,
   });
 
-  // Method to display event summary
+  // Method to display a summary of the event
   String display() {
-    return 'Event: $title\nDescription: $description\nDate: ${timestamp.toLocal()}';
+    return '[$id] $title\n$description\nOccurred on: ${timestamp.toLocal()}';
   }
-}
-
-// Example usage
-void main() {
-  // Creating a sample event
-  TimelineEvent event = TimelineEvent(
-    id: 1,
-    title: 'Module 1 Completed',
-    description: 'Finished the Dart fundamentals module.',
-    timestamp: DateTime.now(),
-  );
-
-  // Displaying the event summary
-  print(event.display());
 }

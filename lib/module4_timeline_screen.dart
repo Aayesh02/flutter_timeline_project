@@ -1,94 +1,62 @@
 import 'package:flutter/material.dart';
 import 'package:timelines_plus/timelines_plus.dart';
 
-void main() {
-  runApp(MaterialApp(
-    home: TimelineScreen(),
-    debugShowCheckedModeBanner: false,
-  ));
-}
+class Module4TimelineScreen extends StatelessWidget {
+  const Module4TimelineScreen({super.key});
 
-// TimelineEvent model
-class TimelineEvent {
-  final int id;
-  final String title;
-  final String description;
-  final DateTime timestamp;
+  final List<TimelineEventData> events = const [
+    TimelineEventData(title: 'Started Project', date: '2024-01-01'),
+    TimelineEventData(title: 'Completed Module 1', date: '2024-01-10'),
+    TimelineEventData(title: 'Completed Module 2', date: '2024-01-15'),
+    TimelineEventData(title: 'Now on Module 4', date: '2024-01-20'),
+  ];
 
-  TimelineEvent({
-    required this.id,
-    required this.title,
-    required this.description,
-    required this.timestamp,
-  });
-}
-
-// Sample events
-final sampleEvents = [
-  TimelineEvent(
-    id: 1,
-    title: "Project Kickoff",
-    description: "Initial project setup and team alignment.",
-    timestamp: DateTime(2025, 6, 1, 9, 30),
-  ),
-  TimelineEvent(
-    id: 2,
-    title: "Module 1 Complete",
-    description: "Dart fundamentals completed.",
-    timestamp: DateTime(2025, 6, 2, 10, 15),
-  ),
-  TimelineEvent(
-    id: 3,
-    title: "Module 2 Complete",
-    description: "Flutter UI basics implemented.",
-    timestamp: DateTime(2025, 6, 3, 11, 00),
-  ),
-];
-
-// Timeline UI
-class TimelineScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Project Timeline')),
-      body: Timeline.tileBuilder(
-        theme: TimelineThemeData(
-          nodePosition: 0.1,
-          connectorTheme: ConnectorThemeData(
-            color: Colors.blueAccent,
-            thickness: 3.0,
-          ),
-          indicatorTheme: IndicatorThemeData(
-            size: 30.0,
+      appBar: AppBar(title: const Text('Timeline (Module 4)')),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: FixedTimeline.tileBuilder(
+          theme: TimelineThemeData(
+            nodePosition: 0,
             color: Colors.blue,
+            indicatorTheme: const IndicatorThemeData(
+              position: 0.5,
+              size: 30.0,
+            ),
+            connectorTheme: const ConnectorThemeData(
+              thickness: 3.0,
+              color: Colors.grey,
+            ),
           ),
-        ),
-        builder: TimelineTileBuilder.fromStyle(
-          contentsAlign: ContentsAlign.basic,
-          itemCount: sampleEvents.length,
-          contentsBuilder: (context, index) {
-            final event = sampleEvents[index];
-            return Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Card(
-                elevation: 4,
-                child: ListTile(
-                  title: Text(event.title),
-                  subtitle: Text(event.description),
-                  trailing: Text(
-                    "${event.timestamp.month}/${event.timestamp.day} ${event.timestamp.hour}:${event.timestamp.minute.toString().padLeft(2, '0')}",
-                    style: TextStyle(fontSize: 12),
-                  ),
-                ),
-              ),
-            );
-          },
-          indicatorBuilder: (_, index) => DotIndicator(
-            color: Colors.deepPurple,
-            child: Icon(Icons.check, color: Colors.white, size: 16),
+          builder: TimelineTileBuilder.connected(
+            itemCount: events.length,
+            contentsBuilder: (_, index) {
+              final event = events[index];
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text('${event.date}: ${event.title}'),
+              );
+            },
+            indicatorBuilder: (_, index) => const DotIndicator(
+              color: Colors.blue,
+              child: Icon(Icons.check, color: Colors.white, size: 16),
+            ),
+            connectorBuilder: (_, index, ___) => const SolidLineConnector(),
           ),
         ),
       ),
     );
   }
+}
+
+class TimelineEventData {
+  final String title;
+  final String date;
+
+  const TimelineEventData({
+    required this.title,
+    required this.date,
+  });
 }
