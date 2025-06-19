@@ -5,7 +5,7 @@ name: Deploy Flutter Web to GitHub Pages
 # Trigger this workflow when a push is made to the 'main' branch
 on:
   push:
-    branches: [main] # Adjust to 'master' if your default branch is named that
+    branches: [master] # Adjust to 'master' if your default branch is named that
 
 jobs:
   build:

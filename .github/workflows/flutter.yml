@@ -4,9 +4,9 @@ name: Flutter CI
 # Trigger the workflow on push or pull request events to the 'main' branch
 on:
   push:
-    branches: [ main ]  # Run when code is pushed to the main branch
+    branches: [ master ]  # Run when code is pushed to the main branch
   pull_request:
-    branches: [ main ]  # Run when a pull request targets the main branch
+    branches: [ master ]  # Run when a pull request targets the main branch
 
 jobs:
   build:  # This is the name of the job
