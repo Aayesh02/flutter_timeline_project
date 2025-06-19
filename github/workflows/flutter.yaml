@@ -1,28 +1,35 @@
+# This file defines a GitHub Actions workflow named "Flutter CI"
 name: Flutter CI
 
+# Trigger the workflow on push or pull request events to the 'main' branch
 on:
   push:
-    branches: [ main ]
+    branches: [ main ]  # Run when code is pushed to the main branch
   pull_request:
-    branches: [ main ]
+    branches: [ main ]  # Run when a pull request targets the main branch
 
 jobs:
-  build:
+  build:  # This is the name of the job
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest  # Use the latest Ubuntu runner provided by GitHub
 
     steps:
-    - uses: actions/checkout@v3
+    # Step 1: Checkout the repository code
+    - uses: actions/checkout@v3  # Checks out your repository code so the workflow can access it
 
-    - uses: subosito/flutter-action@v2
+    # Step 2: Set up Flutter using a prebuilt action
+    - uses: subosito/flutter-action@v2  # Uses the Flutter action to set up the Flutter SDK
       with:
-        flutter-version: '3.8.1'
+        flutter-version: '3.8.1'  # Specifies the Flutter version to install
 
+    # Step 3: Install all Flutter/Dart dependencies listed in pubspec.yaml
     - name: Install dependencies
       run: flutter pub get
 
+    # Step 4: Run static code analysis to catch errors and enforce style rules
     - name: Analyze
       run: flutter analyze
 
+    # Step 5: Run unit and widget tests
     - name: Run tests
       run: flutter test
