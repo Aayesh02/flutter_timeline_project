@@ -20,7 +20,7 @@ jobs:
     # Step 2: Set up Flutter using a prebuilt action
     - uses: subosito/flutter-action@v2  # Uses the Flutter action to set up the Flutter SDK
       with:
-        flutter-version: '3.10.6'  # Specifies the Flutter version to install
+        flutter-version: '3.22.1'  # Specifies the Flutter version to install
 
     # Step 3: Install all Flutter/Dart dependencies listed in pubspec.yaml
     - name: Install dependencies
