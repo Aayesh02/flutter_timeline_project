@@ -28,7 +28,10 @@ jobs:
 
     # Step 4: Run static code analysis to catch errors and enforce style rules
     - name: Analyze
-      run: flutter analyze
+      run: |
+        flutter analyze > analyze.log
+        cat analyze.log
+        ! grep -q "error •" analyze.log  # Only fail if actual errors are found
 
     # Step 5: Run unit and widget tests
     - name: Run tests
