@@ -18,7 +18,7 @@ jobs:
     # Step 2: Set up Flutter SDK using a prebuilt GitHub action
     - uses: subosito/flutter-action@v2
       with:
-        flutter-version: '3.10.6'  # Set the Flutter version you want to use (must match your local version)
+        flutter-version: '3.22.1'  # Set the Flutter version you want to use (must match your local version)
 
     # Step 3: Install Dart and Flutter dependencies listed in pubspec.yaml
     - name: Install dependencies
